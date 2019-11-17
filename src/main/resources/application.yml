@@ -1,9 +1,59 @@
+server:
+  port: 8080
+
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          # ���̽��� �� ����
-          facebook:
-            client-id: 258439305094137
-            client-secret: bea8f2876a1ccd1ec09b5bd974e90bcc
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    database-platform: org.hivernate.dialect.H2Dialect
+    # 도메인 객체 구성과 DB 스키마를 비교해 필요한 테이블이나
+    # 칼럼이 없을 때 도메인 객체에 맞춰 DB 스키마를 변경함
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+  jwt:
+    secret: huejwtsecret
+  social:
+    kakao:
+      client_id: c685fa98f337be32a2664c7de4a04691
+      redirect: /oauth
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+  url:
+    base: http://localhost:8080
+
+#server:
+#  port: 8080
+#
+#spring:
+#  social:
+#    kakao:
+#      client_id: c685fa98f337be32a2664c7de4a04691
+#      redirect: /oauth
+#      url:
+#        login: https://kauth.kakao.com/oauth/authorize
+#        token: https://kauth.kakao.com/oauth/token
+#        profile: https://kapi.kakao.com/v2/user/me
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#  jpa:
+#    database-platform: org.hivernate.dialect.H2Dialect
+#    # 도메인 객체 구성과 DB 스키마를 비교해 필요한 테이블이나
+#    # 칼럼이 없을 때 도메인 객체에 맞춰 DB 스키마를 변경함
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          auto: update
+#    # JPA가 실행하는 쿼리를 console 로그로 출력
+#    show-sql: true
+#  jwt:
+#    secret: hueJwtSecret
+#  url:
+#    base: http://localhost:8080

@@ -8,8 +8,8 @@ spring:
     username: sa
   jpa:
     database-platform: org.hivernate.dialect.H2Dialect
-    # ë„ë©”ì¸ ê°ì²´ êµ¬ì„±ê³¼ DB ìŠ¤í‚¤ë§ˆë¥¼ ë¹„êµí•´ í•„ìš”í•œ í…Œì´ë¸”ì´ë‚˜
-    # ì¹¼ëŸ¼ì´ ì—†ì„ ë•Œ ë„ë©”ì¸ ê°ì²´ì— ë§ì¶° DB ìŠ¤í‚¤ë§ˆë¥¼ ë³€ê²½í•¨
+    # µµ¸ŞÀÎ °´Ã¼ ±¸¼º°ú DB ½ºÅ°¸¶¸¦ ºñ±³ÇØ ÇÊ¿äÇÑ Å×ÀÌºíÀÌ³ª
+    # Ä®·³ÀÌ ¾øÀ» ¶§ µµ¸ŞÀÎ °´Ã¼¿¡ ¸ÂÃç DB ½ºÅ°¸¶¸¦ º¯°æÇÔ
     properties:
       hibernate:
         hbm2ddl:
@@ -26,34 +26,3 @@ spring:
         profile: https://kapi.kakao.com/v2/user/me
   url:
     base: http://localhost:8080
-
-#server:
-#  port: 8080
-#
-#spring:
-#  social:
-#    kakao:
-#      client_id: c685fa98f337be32a2664c7de4a04691
-#      redirect: /oauth
-#      url:
-#        login: https://kauth.kakao.com/oauth/authorize
-#        token: https://kauth.kakao.com/oauth/token
-#        profile: https://kapi.kakao.com/v2/user/me
-#  datasource:
-#    url: jdbc:h2:tcp://localhost/~/test
-#    driver-class-name: org.h2.Driver
-#    username: sa
-#  jpa:
-#    database-platform: org.hivernate.dialect.H2Dialect
-#    # ë„ë©”ì¸ ê°ì²´ êµ¬ì„±ê³¼ DB ìŠ¤í‚¤ë§ˆë¥¼ ë¹„êµí•´ í•„ìš”í•œ í…Œì´ë¸”ì´ë‚˜
-#    # ì¹¼ëŸ¼ì´ ì—†ì„ ë•Œ ë„ë©”ì¸ ê°ì²´ì— ë§ì¶° DB ìŠ¤í‚¤ë§ˆë¥¼ ë³€ê²½í•¨
-#    properties:
-#      hibernate:
-#        hbm2ddl:
-#          auto: update
-#    # JPAê°€ ì‹¤í–‰í•˜ëŠ” ì¿¼ë¦¬ë¥¼ console ë¡œê·¸ë¡œ ì¶œë ¥
-#    show-sql: true
-#  jwt:
-#    secret: hueJwtSecret
-#  url:
-#    base: http://localhost:8080

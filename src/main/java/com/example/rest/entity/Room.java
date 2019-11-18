@@ -36,5 +36,19 @@ public class Room {
     @Column(nullable = false)
     private Boolean isSecret;
 
+    // 게임 진행 중인지 여부 : false - 대기 중 , true - 게임 진행 중
+    @Column(nullable = false)
+    private Boolean isPlaying;
+
+    // 게임 진행 라운드 수 : 1, 3, 5
+    @Column(nullable = false)
+    private Integer round;
+
+    // 한 턴의 제한 시간 : 60, 90, 120
+    @Column(nullable = false)
+    private Integer limitTime;
+
     // 비밀번호 추가
+    @Column(nullable = true, length = 30)
+    private String password;
 }

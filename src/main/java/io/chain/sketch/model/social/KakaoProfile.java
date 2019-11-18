@@ -16,6 +16,10 @@ public class KakaoProfile {
         return this.getProperties().getNickname();
     }
 
+    public String getProfileImage() {
+        return this.getProperties().getProfile_image();
+    }
+
     @Getter
     @Setter
     @ToString

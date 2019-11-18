@@ -46,6 +46,8 @@ public class User implements UserDetails {
     private Integer score;
     @Column(nullable = false)
     private Integer level;
+    @Column(nullable = false)
+    private String profileImage;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

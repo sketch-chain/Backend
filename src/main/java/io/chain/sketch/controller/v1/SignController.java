@@ -55,6 +55,7 @@ public class SignController {
         userJpaRepo.save(User.builder()
                 .uid(String.valueOf(profile.getId()))
                 .name(profile.getNickname())
+                .profileImage(profile.getProfileImage())
                 .roles(Collections.singletonList("ROLE_USER"))
                 .coin(0)
                 .exp(0)

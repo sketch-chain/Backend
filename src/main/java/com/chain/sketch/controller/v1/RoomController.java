@@ -10,8 +10,12 @@ import com.chain.sketch.model.response.ListResult;
 import com.chain.sketch.repo.RoomJpaRepo;
 import com.chain.sketch.repo.UserJpaRepo;
 import com.chain.sketch.service.ResponseService;
+import com.chain.sketch.webSocket.model.ChatRoom;
+import com.chain.sketch.webSocket.repo.ChatRoomRepository;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,17 @@ public class RoomController {
     private final RoomJpaRepo roomJpaRepo;
     private final UserJpaRepo userJpaRepo;
     private final ResponseService responseService;
+    private final ChatRoomRepository chatRoomRepository;
+
+    @Autowired
+    public RoomController(ChatRoomRepository chatRoomRepository,
+                          RoomJpaRepo roomJpaRepo,
+                          UserJpaRepo userJpaRepo,
+                          ResponseService responseService) {
+        this.chatRoomRepository = chatRoomRepository;
+        this.responseService = responseService;
+        this.roomJpaRepo = roomJpaRepo;
+        this.userJpaRepo = userJpaRepo; }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
@@ -55,6 +70,8 @@ public class RoomController {
                 .limitTime(limit)
                 .round(round)
                 .build());
+
+        chatRoomRepository.addChatRoom(ChatRoom.create(title));
 
         return responseService.getSuccessResult();
     }
@@ -89,6 +106,8 @@ public class RoomController {
                 .limitTime(limit)
                 .round(round)
                 .build());
+
+        chatRoomRepository.addChatRoom(ChatRoom.create(title));
         return responseService.getSuccessResult();
     }
 

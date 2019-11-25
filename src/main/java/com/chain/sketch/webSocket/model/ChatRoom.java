@@ -21,7 +21,8 @@ public class ChatRoom {
     // 채팅방 생성
     public static ChatRoom create(@NonNull String name) {
         ChatRoom room = new ChatRoom();
-        room.id = UUID.randomUUID().toString();
+        //room.id = UUID.randomUUID().toString();
+        room.id = name;
         room.name = name;
         return room;
     }

@@ -31,8 +31,12 @@ public class ChatHandler extends TextWebSocketHandler {
 
         String payload = message.getPayload();
         log.info("payload : {}", payload);
+//        log.info("session : {}", session.getId());
 
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
+//        log.info("chatRoomId : {}", chatMessage.getChatRoomId());
+//        log.info("roomId : {}", repository.getChatRoom(chatMessage.getChatRoomId()));
+//        log.info("rooms : {}", repository.getChatRooms());
         ChatRoom chatRoom = repository.getChatRoom(chatMessage.getChatRoomId());
         chatRoom.handleMessage(session, chatMessage, objectMapper);
     }

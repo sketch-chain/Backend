@@ -1,8 +1,6 @@
 package com.chain.sketch.entity;
 
-
 import lombok.*;
-
 import javax.persistence.*;
 
 @Builder

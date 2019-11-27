@@ -67,6 +67,12 @@ public class ExceptionAdvice {
         return responseService.getFailResult(-1006, "이미 동일한 제목의 게임 방이 존재합니다.");
     }
 
+    @ExceptionHandler(RoomNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public CommonResult RoomNotFoundException(HttpServletRequest request, RoomNotFoundException e) {
+        return responseService.getFailResult(-1007, "해당하는 게임 방을 찾을 수 없습니다.");
+    }
+
     @ExceptionHandler(Exception.class)
     /*
         Exception 발생 시 해당 Handler 를 통해서 처리함.

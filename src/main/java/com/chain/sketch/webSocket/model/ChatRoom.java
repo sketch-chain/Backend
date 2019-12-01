@@ -43,6 +43,10 @@ public class ChatRoom {
 
         if (chatType == MessageType.JOIN) {
             join(session);
+            Room room = roomJpaRepo.findByTitle(title).orElseThrow(RoomExistException::new);
+            Integer people = room.getAllPeople() + 1;
+            room.setAllPeople(people);
+            roomJpaRepo.save(room);
             chatMessage.setMessage(chatMessage.getWriter() + "님이 입장했습니다.");
         }
 
@@ -59,7 +63,7 @@ public class ChatRoom {
             log.info("rooms : {}", roomJpaRepo.findAll());
             log.info("room : {} ", roomJpaRepo.findByTitle(title).orElseThrow(RoomNotFoundException::new));
             Room room = roomJpaRepo.findByTitle(title).orElseThrow(RoomNotFoundException::new);
-            log.info("leader : {}", room.getLeaderIdx());
+            log.info("leader : {}", room.getLeaderName());
             if(!room.getReadyPeople().equals(room.getAllPeople())) {
                 chatMessage.setType(MessageType.ERROR);
                 chatMessage.setMessage("플레이어들이 모두 준비하지 않아 게임을 시작할 수 없습니다.");
@@ -83,7 +87,6 @@ public class ChatRoom {
     }
 
     public void remove(WebSocketSession target) {
-
         String targedId = target.getId();
         sessions.removeIf(session -> session.getId().equals(targedId));
     }

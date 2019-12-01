@@ -20,7 +20,7 @@ public class Room {
 
     // 방장 idx
     @Column(nullable = false, length = 30)
-    private String leaderIdx;
+    private String leaderName;
 
     // 게임에 참가중인 사람수
     @Column(nullable = false)

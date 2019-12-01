@@ -2,11 +2,13 @@ package com.chain.sketch.controller.v1;
 
 
 import com.chain.sketch.advice.exception.RoomExistException;
+import com.chain.sketch.advice.exception.RoomNotFoundException;
 import com.chain.sketch.advice.exception.UserNotFoundException;
 import com.chain.sketch.entity.Room;
 import com.chain.sketch.entity.User;
 import com.chain.sketch.model.response.CommonResult;
 import com.chain.sketch.model.response.ListResult;
+import com.chain.sketch.model.response.SingleResult;
 import com.chain.sketch.repo.RoomJpaRepo;
 import com.chain.sketch.repo.UserJpaRepo;
 import com.chain.sketch.service.ResponseService;
@@ -63,8 +65,8 @@ public class RoomController {
         roomJpaRepo.save(Room.builder()
                 .title(title)
                 .isSecret(false)
-                .leaderIdx(id)
-                .allPeople(1)
+                .leaderName(user.getName())
+                .allPeople(0)
                 .readyPeople(1)
                 .isPlaying(false)
                 .limitTime(limit)
@@ -99,8 +101,8 @@ public class RoomController {
                 .title(title)
                 .isSecret(true)
                 .password(password)
-                .leaderIdx(id)
-                .allPeople(1)
+                .leaderName(user.getName())
+                .allPeople(0)
                 .readyPeople(1)
                 .isPlaying(false)
                 .limitTime(limit)
@@ -109,6 +111,16 @@ public class RoomController {
 
         chatRoomRepository.addChatRoom(ChatRoom.create(title));
         return responseService.getSuccessResult();
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "특정 게임 방 정보 가져오기", notes = "게임방 제목으로 특정 게임방의 정보를 가져온다.")
+    @GetMapping("/room")
+    public SingleResult<Room> getOneRoom(@ApiParam(value = "방 제목", required = true) @RequestParam String title) {
+        Room room = roomJpaRepo.findByTitle(title).orElseThrow(RoomNotFoundException::new);
+        return responseService.getSingleResult(room);
     }
 
     @ApiImplicitParams({
